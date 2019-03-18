@@ -12,6 +12,5 @@
 */
 
 Route::get('/', function () {
-    $users = DB::select('select * from users');
     return view('welcome');
 });
