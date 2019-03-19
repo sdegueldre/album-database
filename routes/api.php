@@ -16,3 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('register', function(){
+    return view('welcome');
+});
+
+Route::post('login', function(){
+    return view('welcome');
+});
+
+Route::post('logout', function(){
+    return view('welcome');
+});
