@@ -1,6 +1,6 @@
 <?php
 
-if(env('APP_ENV', 'server') == 'server'){
+if(env('APP_ENV', 'production') == 'production'){
     $url = parse_url(getenv("DATABASE_URL"));
 
     $host = $url["host"];
