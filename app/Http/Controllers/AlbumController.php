@@ -10,16 +10,7 @@ class AlbumController extends Controller
     public function create(Request $request)
     {
         $album = new Album;
-        $album->image = $request->image;
-        $album->artist = $request->artist;
-        $album->name = $request->name;
-        $album->genre = $request->genre;
-        $album->year = $request->year;
-        $album->label = $request->label;
-        $album->songs = $request->songs;
-        $album->rating = $request->rating;
-
-        $id = $album->save();
+        $id = $album->save($request->all());
         return $id ? "Created album successfully" : 'There was a problem trying to insert into the database';
     }
 
@@ -42,16 +33,9 @@ class AlbumController extends Controller
 
     public function update(Request $request)
     {
-        $album = Album::find($request->id);
-        $album->image = $request->image;
-        $album->artist = $request->artist;
-        $album->name = $request->name;
-        $album->genre = $request->genre;
-        $album->year = $request->year;
-        $album->label = $request->label;
-        $album->songs = $request->songs;
-        $album->rating = $request->rating;
-        $id = $album->save();
+        \Log::info(print_r($request->input(), true));
+        $album = Album::find($request->input('id'));
+        $id = $album->save($request->all());
         return $id ? "Updated album successfully" : 'There was a problem trying to update the album';
     }
 
