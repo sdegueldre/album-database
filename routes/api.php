@@ -17,8 +17,11 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'ApiAuthController@logout');
     Route::post('refresh', 'ApiAuthController@refresh');
     Route::get('user', 'ApiAuthController@user');
-    Route::get('album', 'AlbumController@album');
-    Route::get('albums', 'AlbumController@albums');
+
+    Route::post('album', 'AlbumController@create');
+    Route::get('album', 'AlbumController@read');
+    Route::put('album', 'AlbumController@update');
+    Route::delete('album', 'AlbumController@delete');
 });
 
 Route::post('login', 'ApiAuthController@login');

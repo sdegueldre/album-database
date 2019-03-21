@@ -20,7 +20,7 @@ class CreateAlbumsTable extends Migration
             $table->string('artist');
             $table->string('name');
             $table->string('genre');
-            $table->date('year');
+            $table->tinyInteger('year');
             $table->string('label');
             $table->text('songs');
             $table->tinyInteger('rating');
