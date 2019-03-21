@@ -18,6 +18,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('refresh', 'ApiAuthController@refresh');
     Route::get('user', 'ApiAuthController@user');
     Route::get('album', 'AlbumController@album');
+    Route::get('albums', 'AlbumController@albums');
 });
 
 Route::post('login', 'ApiAuthController@login');
