@@ -28,8 +28,16 @@ class AlbumController extends Controller
         if ($request->has('id')) {
             $result = Album::find($request->input('id'));
             return $result ? $result : 'No such album.';
+        } elseif ($request->has('queryString')) {
+            $result = Album::where(
+                'artist', 'ILIKE', '%'.$request->input('queryString').'%')->orWhere(
+                'name', 'ILIKE', '%'.$request->input('queryString').'%')->orWhere(
+                'label', 'ILIKE', '%'.$request->input('queryString').'%')->orWhere(
+                'genre', 'ILIKE', '%'.$request->input('queryString').'%')->orWhere(
+                'songs', 'ILIKE', '%'.$request->input('queryString').'%')->get();
+            return count($result) > 0 ? $result : 'No such album.';
         }
-        return Album::inRandomOrder()->take(1)->get();
+        return Album::inRandomOrder()->first();
     }
 
     public function update(Request $request)
