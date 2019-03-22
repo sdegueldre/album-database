@@ -10,15 +10,20 @@ class AlbumController extends Controller
     public function create(Request $request)
     {
         $album = new Album;
-        $id = $album->save($request->all());
-        return $id ? "Created album successfully" : 'There was a problem trying to insert into the database';
+        $instance = $album->create($request->all());
+        if($instance){
+            return response()->json($instance, 200);
+        }
+        return response()->json('There was a problem trying to create the album', 500);
     }
 
     public function read(Request $request)
     {
         if ($request->has('id')) {
-            $result = Album::find($request->input('id'));
-            return $result ? $result : 'No such album.';
+            $result = Album::find($request->id);
+            if($result)
+                return $result;
+            return response()->json('No such album.', 404);
         } elseif ($request->has('queryString')) {
             $result = Album::where(
                 'artist', 'ILIKE', '%'.$request->input('queryString').'%')->orWhere(
@@ -26,23 +31,34 @@ class AlbumController extends Controller
                 'label', 'ILIKE', '%'.$request->input('queryString').'%')->orWhere(
                 'genre', 'ILIKE', '%'.$request->input('queryString').'%')->orWhere(
                 'songs', 'ILIKE', '%'.$request->input('queryString').'%')->get();
-            return count($result) > 0 ? $result : 'No such album.';
+            if(count($result) > 0)
+                return $result;
+            return response()->json('No such album.', 404);
         }
-        return Album::inRandomOrder()->first();
+        return response()->json(Album::inRandomOrder()->first(), 200);
     }
 
     public function update(Request $request)
     {
-        \Log::info(print_r($request->input(), true));
-        $album = Album::find($request->input('id'));
-        $id = $album->save($request->all());
-        return $id ? "Updated album successfully" : 'There was a problem trying to update the album';
+        $album = Album::find($request->id);
+        $success = $album->update($request->all());
+        if($success){
+            return response()->json($album, 200);
+        }
+        return response()->json('There was a problem trying to update the album', 500);
     }
 
     public function delete(Request $request)
     {
-        $album = Album::find($request->id);
-        $status = $album->delete();
-        return $status ? "Deleted album successfully" : 'There was a problem trying to delete the album';
+        $id = $request->id;
+        $album = Album::find($id);
+        if($album){
+            $success = $album->delete();
+            if($success){
+                return response()->json("Deleted album successfully", 200);
+            }
+            return response()->json('There was a problem trying to delete the album', 500);
+        }
+        return response()->json("There is no album with id $id", 404);
     }
 }
