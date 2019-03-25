@@ -30,7 +30,7 @@ A dictionary containing the following keys:
     
 ### GET `/albums[?queryString=:query][&][offset=:offset]`
 
-Returns the first 10 characters.
+Returns the first 10 albums.
 
 Optional query parameter returns only albums where any of the strings match the query.
 
