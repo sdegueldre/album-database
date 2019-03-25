@@ -36,11 +36,11 @@ Optional query parameter returns only albums where any of the strings match the 
 
 Optional offset parameter returns the 10 albums after the offset, useful for pagination.
 
-### GET /albums/:id
+### GET `/albums/:id`
 
 Returns an album by id.
 
-### POST /albums
+### POST `/albums`
 
 Only takes JSON as input.
 
@@ -48,13 +48,13 @@ Creates a new album.
 
 Returns the newly created album object, including its id.
 
-### PUT /albums/:id
+### PUT `/albums/:id`
 
 Only takes JSON as input.
 
 Updates the specified album.
 
-### DELETE /albums/:id
+### DELETE `/albums/:id`
 
 Deletes the specified album.
 
