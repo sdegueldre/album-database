@@ -1,6 +1,6 @@
 # Album database API
 
-This project allows you to run a JSON API for an album database, you interact with a live demo of it at `http://album-database.herokuapp.com/api`.
+This project allows you to run a JSON API for an album database.
 
 ## Setting up
 
